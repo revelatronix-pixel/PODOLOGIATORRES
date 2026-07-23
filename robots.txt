@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://podologiaclinicatorres.cl/sitemap.xml
