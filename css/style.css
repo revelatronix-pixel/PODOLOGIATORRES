@@ -280,6 +280,7 @@ p{ margin: 0 0 1em; }
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
+  object-position: center 15%;
   border: 6px solid rgba(255,255,255,0.9);
   box-shadow: 0 20px 45px rgba(0,0,0,0.35);
 }
@@ -407,6 +408,8 @@ p{ margin: 0 0 1em; }
   font-size: 0.92rem;
 }
 .about__address svg{ width: 22px; height: 22px; color: var(--torres); flex-shrink: 0; }
+
+.about__cta{ margin-top: 20px; }
 
 /* ---------- Servicios ---------- */
 .services-grid{
