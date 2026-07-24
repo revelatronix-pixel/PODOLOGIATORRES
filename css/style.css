@@ -405,23 +405,51 @@ p{ margin: 0 0 1em; }
 .service-card{
   background: #fff;
   border-radius: var(--radius);
-  padding: 30px 26px;
+  overflow: hidden;
   box-shadow: var(--shadow-card);
   border: 1px solid rgba(11,26,74,0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .service-card:hover{ transform: translateY(-6px); box-shadow: 0 20px 40px rgba(11,26,74,0.14); }
 
+.service-card__photo{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  background: var(--niebla);
+}
+.service-card__photo-placeholder{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(76,141,255,0.14), rgba(11,26,74,0.03));
+  color: #8FA3D6;
+}
+.service-card__photo-placeholder svg{ width: 36px; height: 36px; opacity: 0.7; }
+.service-card__photo-placeholder span{ font-size: 0.78rem; font-weight: 600; }
+
+.service-card__body{ padding: 22px 26px 26px; }
+
 .service-card__icon{
-  width: 52px; height: 52px;
-  border-radius: 14px;
+  width: 44px; height: 44px;
+  border-radius: 12px;
   background: var(--niebla);
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  margin-top: -44px;
+  position: relative;
+  z-index: 2;
+  border: 3px solid #fff;
 }
-.service-card__icon svg{ width: 26px; height: 26px; color: var(--torres); }
+.service-card__icon svg{ width: 22px; height: 22px; color: var(--torres); }
 
 .service-card h3{ font-size: 1.12rem; margin-bottom: 10px; }
+.service-card__common{ font-size: 0.78rem; font-weight: 500; color: #7A88B8; }
 .service-card p{ font-size: 0.92rem; color: #495275; margin-bottom: 0; }
 
 /* ---------- Casos clínicos (slider) ---------- */
