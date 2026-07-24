@@ -19,6 +19,98 @@
     });
   }
 
+  // Slider de casos clínicos (antes/después)
+  var slider = document.querySelector("[data-cases-slider]");
+  if (slider) {
+    var track = slider.querySelector(".cases-slider__track");
+    var slides = Array.prototype.slice.call(track.children);
+    var dotsWrap = slider.querySelector(".cases-slider__dots");
+    var prevBtn = slider.querySelector(".cases-slider__arrow--prev");
+    var nextBtn = slider.querySelector(".cases-slider__arrow--next");
+    var current = 0;
+    var autoplayDelay = 6000;
+    var autoplayTimer = null;
+
+    slides.forEach(function (_, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.setAttribute("role", "tab");
+      dot.setAttribute("aria-label", "Ir al caso " + (i + 1));
+      if (i === 0) dot.classList.add("is-active");
+      dot.addEventListener("click", function () {
+        goTo(i);
+        restartAutoplay();
+      });
+      dotsWrap.appendChild(dot);
+    });
+    var dots = Array.prototype.slice.call(dotsWrap.children);
+
+    function update() {
+      track.style.transform = "translateX(-" + current * 100 + "%)";
+      dots.forEach(function (d, i) {
+        d.classList.toggle("is-active", i === current);
+      });
+    }
+
+    function goTo(index) {
+      current = (index + slides.length) % slides.length;
+      update();
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function startAutoplay() {
+      if (slides.length < 2) return;
+      autoplayTimer = setInterval(next, autoplayDelay);
+    }
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+    }
+    function restartAutoplay() {
+      stopAutoplay();
+      startAutoplay();
+    }
+
+    if (nextBtn) nextBtn.addEventListener("click", function () { next(); restartAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener("click", function () { prev(); restartAutoplay(); });
+
+    // Teclado
+    slider.setAttribute("tabindex", "0");
+    slider.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { next(); restartAutoplay(); }
+      if (e.key === "ArrowLeft") { prev(); restartAutoplay(); }
+    });
+
+    // Swipe táctil
+    var startX = 0, deltaX = 0, dragging = false;
+    track.addEventListener("touchstart", function (e) {
+      startX = e.touches[0].clientX;
+      dragging = true;
+      stopAutoplay();
+    }, { passive: true });
+    track.addEventListener("touchmove", function (e) {
+      if (!dragging) return;
+      deltaX = e.touches[0].clientX - startX;
+    }, { passive: true });
+    track.addEventListener("touchend", function () {
+      if (!dragging) return;
+      dragging = false;
+      if (Math.abs(deltaX) > 40) {
+        if (deltaX < 0) next(); else prev();
+      }
+      deltaX = 0;
+      restartAutoplay();
+    });
+
+    // Pausar autoplay al pasar el mouse
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+
+    update();
+    startAutoplay();
+  }
+
   // Año dinámico en el footer
   var yearEl = document.getElementById("current-year");
   if (yearEl) {

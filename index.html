@@ -151,9 +151,13 @@
       <div class="about__grid">
         <div class="reveal">
           <div class="about__portrait">
-            <svg class="foot-outline" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" aria-hidden="true">
-              <path d="M50 20c11 0 18 9 18 21 0 10-5 15-5 23 0 10 7 13 7 23 0 11-9 19-20 19s-20-8-20-19c0-10 7-13 7-23 0-8-5-13-5-23 0-12 7-21 18-21z"></path>
-            </svg>
+            <div class="about__photo">
+              <img src="assets/images/fabiola-torres.jpg" alt="Fabiola Torres, podóloga a cargo de Podología Clínica Torres" loading="lazy" onerror="this.parentElement.classList.add('about__photo--empty'); this.remove();">
+              <div class="about__photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path></svg>
+                <span>Foto de Fabiola Torres</span>
+              </div>
+            </div>
             <h3>Fabiola Torres</h3>
             <p>Podóloga a cargo de Podología Clínica Torres.</p>
             <div class="about__credentials">
@@ -245,23 +249,36 @@
         <p>Registro fotográfico de tratamientos realizados en Podología Clínica Torres, con autorización de cada paciente.</p>
       </div>
 
-      <div class="cases-grid">
-        <figure class="case-card reveal">
-          <img src="assets/images/caso-1.png" alt="Antes y después de un tratamiento de onicomicosis (hongos en las uñas) en el dedo pulgar del pie" loading="lazy" width="569" height="329">
-          <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
-        </figure>
-        <figure class="case-card reveal">
-          <img src="assets/images/caso-2.png" alt="Antes y después de un tratamiento podológico para uña con hongos y engrosamiento ungueal" loading="lazy" width="576" height="329">
-          <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
-        </figure>
-        <figure class="case-card reveal">
-          <img src="assets/images/caso-3.png" alt="Antes y después de un tratamiento de onicomicosis en la uña del dedo pulgar del pie" loading="lazy" width="577" height="325">
-          <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
-        </figure>
-        <figure class="case-card reveal">
-          <img src="assets/images/caso-4.png" alt="Antes y después de un tratamiento podológico de una uña afectada por hongos" loading="lazy" width="562" height="337">
-          <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
-        </figure>
+      <div class="cases-slider" data-cases-slider>
+        <div class="cases-slider__viewport">
+          <div class="cases-slider__track">
+            <figure class="case-card reveal">
+              <img src="assets/images/caso-1.png" alt="Antes y después de un tratamiento de onicomicosis (hongos en las uñas) en el dedo pulgar del pie" loading="lazy" width="569" height="329">
+              <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
+            </figure>
+            <figure class="case-card reveal">
+              <img src="assets/images/caso-2.png" alt="Antes y después de un tratamiento podológico para uña con hongos y engrosamiento ungueal" loading="lazy" width="576" height="329">
+              <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
+            </figure>
+            <figure class="case-card reveal">
+              <img src="assets/images/caso-3.png" alt="Antes y después de un tratamiento de onicomicosis en la uña del dedo pulgar del pie" loading="lazy" width="577" height="325">
+              <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
+            </figure>
+            <figure class="case-card reveal">
+              <img src="assets/images/caso-4.png" alt="Antes y después de un tratamiento podológico de una uña afectada por hongos" loading="lazy" width="562" height="337">
+              <figcaption class="case-card__label"><span>Antes</span><span>Después</span></figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <button type="button" class="cases-slider__arrow cases-slider__arrow--prev" aria-label="Caso anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+        <button type="button" class="cases-slider__arrow cases-slider__arrow--next" aria-label="Caso siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"></path></svg>
+        </button>
+
+        <div class="cases-slider__dots" role="tablist" aria-label="Seleccionar caso clínico"></div>
       </div>
 
       <p class="cases-note">Fotografías de pacientes reales, publicadas con su autorización. Los resultados y el tiempo de tratamiento pueden variar según cada caso.</p>

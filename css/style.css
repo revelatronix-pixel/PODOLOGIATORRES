@@ -335,7 +335,37 @@ p{ margin: 0 0 1em; }
   position: relative;
   overflow: hidden;
 }
-.about__portrait svg.foot-outline{ width: 64px; height: 64px; color: var(--cielo); margin-bottom: 24px; }
+.about__photo{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, rgba(76,141,255,0.16), rgba(255,255,255,0.03));
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.about__photo img{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about__photo-placeholder{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #B9C8ED;
+}
+.about__photo-placeholder svg{ width: 48px; height: 48px; opacity: 0.7; }
+.about__photo-placeholder span{ font-size: 0.85rem; font-weight: 600; letter-spacing: 0.01em; }
 .about__portrait h3{ color: #fff; font-size: 1.4rem; }
 .about__portrait p{ color: #B9C8ED; font-size: 0.95rem; margin-bottom: 0; }
 
@@ -394,11 +424,71 @@ p{ margin: 0 0 1em; }
 .service-card h3{ font-size: 1.12rem; margin-bottom: 10px; }
 .service-card p{ font-size: 0.92rem; color: #495275; margin-bottom: 0; }
 
-/* ---------- Casos clínicos ---------- */
-.cases-grid{
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
+/* ---------- Casos clínicos (slider) ---------- */
+.cases-slider{
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cases-slider__viewport{
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.cases-slider__track{
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+
+.cases-slider__track .case-card{
+  flex: 0 0 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.cases-slider__arrow{
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(11,26,74,0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+.cases-slider__arrow:hover{ background: var(--torres); }
+.cases-slider__arrow svg{ width: 20px; height: 20px; }
+.cases-slider__arrow--prev{ left: -22px; }
+.cases-slider__arrow--next{ right: -22px; }
+
+.cases-slider__dots{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+.cases-slider__dots button{
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.cases-slider__dots button.is-active{
+  background: var(--cielo);
+  transform: scale(1.3);
 }
 
 .case-card{
@@ -591,7 +681,9 @@ p{ margin: 0 0 1em; }
   .nav-toggle{ display: flex; align-items: center; justify-content: center; }
   .header-actions .btn--primary span{ display: none; }
   .header-actions .btn--primary{ padding: 12px; }
-  .cases-grid{ grid-template-columns: 1fr; }
+  .cases-slider__arrow{ width: 38px; height: 38px; }
+  .cases-slider__arrow--prev{ left: 6px; }
+  .cases-slider__arrow--next{ right: 6px; }
   .footer__grid{ grid-template-columns: 1fr; gap: 32px; }
   .section{ padding: 64px 0; }
   .hero{ padding: 140px 0 80px; }
