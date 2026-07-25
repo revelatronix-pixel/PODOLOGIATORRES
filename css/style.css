@@ -132,6 +132,13 @@ p{ margin: 0 0 1em; }
 }
 .btn--whatsapp:hover{ background: #2be274; }
 
+.btn--instagram{
+  background: linear-gradient(45deg, #FEDA75, #FA7E1E 30%, #D62976 55%, #962FBF 75%, #4F5BD5);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px rgba(214, 41, 118, 0.35);
+}
+.btn--instagram:hover{ filter: brightness(1.08); }
+
 .btn--outline-dark{
   background: transparent;
   border-color: var(--marino);
