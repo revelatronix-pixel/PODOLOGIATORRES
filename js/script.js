@@ -61,14 +61,14 @@
     function prev() { goTo(current - 1); }
 
     function startAutoplay() {
+      stopAutoplay();
       if (slides.length < 2) return;
       autoplayTimer = setInterval(next, autoplayDelay);
     }
     function stopAutoplay() {
-      if (autoplayTimer) clearInterval(autoplayTimer);
+      if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
     }
     function restartAutoplay() {
-      stopAutoplay();
       startAutoplay();
     }
 
@@ -82,24 +82,30 @@
       if (e.key === "ArrowLeft") { prev(); restartAutoplay(); }
     });
 
-    // Swipe táctil
-    var startX = 0, deltaX = 0, dragging = false;
+    // Swipe táctil (con bloqueo de dirección para no confundir con scroll vertical)
+    var startX = 0, startY = 0, deltaX = 0, deltaY = 0, dragging = false;
     track.addEventListener("touchstart", function (e) {
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      deltaX = 0;
+      deltaY = 0;
       dragging = true;
       stopAutoplay();
     }, { passive: true });
     track.addEventListener("touchmove", function (e) {
       if (!dragging) return;
       deltaX = e.touches[0].clientX - startX;
+      deltaY = e.touches[0].clientY - startY;
     }, { passive: true });
     track.addEventListener("touchend", function () {
       if (!dragging) return;
       dragging = false;
-      if (Math.abs(deltaX) > 40) {
+      // Solo se considera swipe si el movimiento horizontal es claramente mayor al vertical
+      if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
         if (deltaX < 0) next(); else prev();
       }
       deltaX = 0;
+      deltaY = 0;
       restartAutoplay();
     });
 
